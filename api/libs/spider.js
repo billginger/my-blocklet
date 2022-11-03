@@ -7,17 +7,20 @@ const spider = async (url) => {
     return;
   }
   const $ = cheerio.load(response.data);
-  let array = [];
+  const array = [];
+  const getText = (elem, index) => $('td', elem)?.eq(index)?.text()?.trim();
   $('div[id=paywall_mask]>table>tbody>tr').each((i, elem) => {
-    array.push({
-      txHash: $('td', elem)?.eq(1)?.text()?.trim(),
-      blockNumber: $('td', elem)?.eq(3)?.text()?.trim(),
-      time: $('td', elem)?.eq(4)?.text()?.trim(),
-      from: $('td', elem)?.eq(6)?.text()?.trim(),
-      to: $('td', elem)?.eq(8)?.text()?.trim(),
-      value: $('td', elem)?.eq(9)?.text()?.trim(),
-      txFee: $('td', elem)?.eq(10)?.text()?.trim(),
-    });
+    if (getText(elem, 1)?.length) {
+      array.push({
+        txHash: getText(elem, 1),
+        blockNumber: getText(elem, 3),
+        time: getText(elem, 4),
+        from: getText(elem, 6),
+        to: getText(elem, 8),
+        value: getText(elem, 9),
+        txFee: getText(elem, 10),
+      });
+    }
   });
   return array;
 };

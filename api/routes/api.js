@@ -1,11 +1,11 @@
 const express = require('express');
 const spider = require('../libs/spider');
 const cache = require('../libs/cache');
+
 const router = express.Router();
 
 router.get('/txs', async (req, res) => {
-  const a = req.query['a'];
-  const p = req.query['p'] || 1;
+  const { a, p = 1 } = req.query;
   if (!a || isNaN(p)) {
     res.sendStatus(400);
     return;

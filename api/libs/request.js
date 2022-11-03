@@ -9,7 +9,7 @@ const request = async (url) => {
   while (true) {
     try {
       response = await axios.get(url, {
-        timeout
+        timeout,
       });
       break;
     } catch (error) {
@@ -22,6 +22,6 @@ const request = async (url) => {
     }
   }
   return response;
-}
+};
 
 module.exports = request;

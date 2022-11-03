@@ -13,7 +13,9 @@
     "deploy": "npm run bundle && blocklet deploy .blocklet/bundle",
     "upload": "npm run bundle && blocklet upload .blocklet/release/blocklet.json",
     "prepare": "husky install",
-    "bump-version": "zx scripts/bump-version.mjs"
+    "bump-version": "zx scripts/bump-version.mjs",
+    "test": "mocha",
+    "cypress:open": "cypress open"
   },
   "lint-staged": {
     "*.{mjs,js,ts}": [
@@ -40,9 +42,12 @@
   "devDependencies": {
     "@arcblock/eslint-config-base": "^0.2.3",
     "bumpp": "^8.2.1",
+    "chai": "^4.3.6",
+    "cypress": "^10.11.0",
     "eslint": "^8.25.0",
     "husky": "^8.0.1",
     "lint-staged": "^12.5.0",
+    "mocha": "^10.1.0",
     "nodemon": "^2.0.20",
     "prettier": "^2.7.1",
     "rimraf": "^3.0.2",
