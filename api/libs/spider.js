@@ -4,7 +4,7 @@ const request = require('./request');
 const spider = async (url) => {
   const response = await request(url);
   if (!response.data) {
-    return 'Request Failed';
+    return;
   }
   const $ = cheerio.load(response.data);
   let array = [];
