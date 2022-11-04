@@ -5,12 +5,12 @@ const cache = require('../libs/cache');
 const router = express.Router();
 
 router.get('/txs', async (req, res) => {
-  const { a, p = 1 } = req.query;
-  if (!a || isNaN(p)) {
+  const { a, p = 1, ps = 50 } = req.query;
+  if (!a || isNaN(p) || isNaN(ps)) {
     res.sendStatus(400);
     return;
   }
-  const url = `https://etherscan.io/txs?a=${a}&p=${p}`;
+  const url = `https://etherscan.io/txs?a=${a}&p=${p}&ps=${ps}`;
   const cacheData = cache.get(url);
   if (cacheData) {
     res.json(cacheData);
